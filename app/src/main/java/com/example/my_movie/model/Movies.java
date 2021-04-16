@@ -5,6 +5,16 @@ public class Movies {
     private String year;
     private String posterUrl;
 
+    public String getImdbID() {
+        return imdbID;
+    }
+
+    public void setImdbID(String imdbID) {
+        this.imdbID = imdbID;
+    }
+
+    private String imdbID;
+
     public Movies() {
     }
 

@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="8dp"
         >
         <ImageView
             android:id="@+id/posterImageView"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:src="@android:drawable/ic_menu_report_image">
+            android:src="@android:drawable/ic_menu_report_image"/>
 
-
-        </ImageView>
         <TextView
             android:id="@+id/titleTextView"
             android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textColor="@android:color/black"
             android:layout_toEndOf="@+id/posterImageView"></TextView>
 
@@ -32,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="year"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             android:layout_below="@+id/titleTextView"
             android:layout_toEndOf="@+id/posterImageView">

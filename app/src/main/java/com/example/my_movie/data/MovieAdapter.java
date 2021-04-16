@@ -19,11 +19,11 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
     Context context;
-    ArrayList<Movies> allMovies;
+    ArrayList<Movies> movies;
 
     public MovieAdapter(Context context, ArrayList<Movies> arrayList) {
         this.context = context;
-        allMovies = arrayList;
+        movies = arrayList;
     }
 
     @NonNull
@@ -37,7 +37,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
 
-        Movies thisMovies = allMovies.get(position);
+        Movies thisMovies = movies.get(position);
 
         String title = thisMovies.getTitle();
         String year = thisMovies.getYear();
@@ -52,7 +52,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Override
     public int getItemCount() {
-        return allMovies.size();
+        return movies.size();
     }
 
     public class MovieHolder extends RecyclerView.ViewHolder{
