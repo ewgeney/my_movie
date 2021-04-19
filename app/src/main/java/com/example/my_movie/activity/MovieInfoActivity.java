@@ -85,6 +85,7 @@ public class MovieInfoActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
 
             }
