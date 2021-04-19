@@ -6,24 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.my_movie.R;
 import com.example.my_movie.model.Movies;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
+
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
     Context context;
     ArrayList<Movies> movies;
+    OnItemClickListener onItemClickListener;
 
-    public MovieAdapter(Context context, ArrayList<Movies> arrayList) {
+    public interface OnItemClickListener {
+        void onItemClick(Movies item);
+    }
+
+
+    public MovieAdapter(Context context,
+                        ArrayList<Movies> arrayList, OnItemClickListener listener) {
         this.context = context;
         movies = arrayList;
+        onItemClickListener = listener;
+
     }
 
     @NonNull
@@ -32,6 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         View view = LayoutInflater.from(context).inflate(R.layout.movies_item, parent, false);
         return new MovieHolder(view);
+
     }
 
     @Override
@@ -43,11 +51,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         String year = thisMovies.getYear();
         String posterUrl = thisMovies.getPosterUrl();
 
+        holder.bind(movies.get(position), onItemClickListener);
+
         holder.titleTextView.setText(title);
         holder.yearTextView.setText(year);
         Picasso.get().load(posterUrl).into(holder.posterImageView);
-
-
     }
 
     @Override
@@ -60,12 +68,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         TextView yearTextView;
         ImageView posterImageView;
 
+        public void bind(Movies item, OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
+        }
+
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             yearTextView = itemView.findViewById(R.id.yearTextView);
             posterImageView = itemView.findViewById(R.id.posterImageView);
+
         }
     }
 }

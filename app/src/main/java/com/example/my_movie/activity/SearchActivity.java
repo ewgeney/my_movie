@@ -1,8 +1,12 @@
 package com.example.my_movie.activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,24 +16,27 @@ import com.android.volley.toolbox.Volley;
 import com.example.my_movie.R;
 import com.example.my_movie.data.MovieAdapter;
 import com.example.my_movie.model.Movies;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class StartActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private ArrayList<Movies> movies;
     private RequestQueue requestQueue;
     private String movieToSearch;
+    public Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.hasFixedSize();
@@ -69,7 +76,14 @@ public class StartActivity extends AppCompatActivity {
                         movies.add(movie);
                     }
 
-                    movieAdapter = new MovieAdapter(StartActivity.this, movies);
+                    movieAdapter = new MovieAdapter(SearchActivity.this, movies,
+                            new MovieAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Movies item) {
+                            String imdbId = item.getImdbID();
+                            getMovieInfo(imdbId);
+                        }
+                    });
                     recyclerView.setAdapter(movieAdapter);
 
 
@@ -86,5 +100,11 @@ public class StartActivity extends AppCompatActivity {
         });
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void getMovieInfo(String imdbId) {
+        Intent intent = new Intent(this, MovieInfoActivity.class);
+        intent.putExtra("imdbId", imdbId);
+        startActivity(intent);
     }
 }

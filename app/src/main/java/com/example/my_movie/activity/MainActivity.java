@@ -1,7 +1,5 @@
 package com.example.my_movie.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.my_movie.R;
 
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     alertDialog.dismiss();
                 }
-                Intent intent = new Intent(MainActivity.this, StartActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 String movieToSearch = searchEditText.getText().toString();
                 intent.putExtra("movieToSearch", movieToSearch);
                 startActivity(intent);
